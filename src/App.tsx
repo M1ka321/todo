@@ -5,7 +5,6 @@ import {v1} from "uuid";
 
 export type FilterType = "all" | "active" | "completed"
 
-
 function App() {
 
   const [tasks, setTasks] = useState<ITask[]>([
@@ -48,7 +47,7 @@ function App() {
 
   const checkChange = (taskId: string, isDone: boolean) => {
     let task = tasks.find(item => item.id === taskId)
-    if(task){
+    if (task) {
       task.isDone = isDone
     }
     setTasks([...tasks])
