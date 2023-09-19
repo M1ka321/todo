@@ -3,7 +3,7 @@ import './App.css';
 import TodoList, {ITask} from "./components/Todolist";
 import {v1} from "uuid";
 
-export type IFilter = "all" | "active" | "completed"
+export type FilterType = "all" | "active" | "completed"
 
 
 function App() {
@@ -20,9 +20,9 @@ function App() {
       isDone: false
     },
   ])
-  const [filter, setFilter] = useState<IFilter>("active")
+  const [filter, setFilter] = useState<FilterType>("all")
 
-  const changeFilter = (value: IFilter) => {
+  const changeFilter = (value: FilterType) => {
     setFilter(value)
   }
 
@@ -40,11 +40,20 @@ function App() {
     setTasks(filteredTasks)
   }
 
-  const addTask = () => {
-    let newTask = {id:v1(), title: "New task", isDone: false}
+  const addTask = (title: string) => {
+    let newTask = {id: v1(), title: title, isDone: false}
     let newTasks = [newTask, ...tasks]
     setTasks(newTasks)
   }
+
+  const checkChange = (taskId: string, isDone: boolean) => {
+    let task = tasks.find(item => item.id === taskId)
+    if(task){
+      task.isDone = isDone
+    }
+    setTasks([...tasks])
+    console.log(tasks)
+  };
 
 
   return (
@@ -54,6 +63,8 @@ function App() {
         deleteTask={deleteTask}
         changeFilter={changeFilter}
         addTask={addTask}
+        checkChange={checkChange}
+        filter={filter}
       />
     </div>
   );

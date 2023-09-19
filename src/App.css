@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.error {
+  border: red 1px solid;
+}
+
+.error-message {
+  color: red;
+}
+
+.active-button {
+  background-color: chartreuse;
+}
+
+.done-task {
+  opacity: 0.6;
+}
